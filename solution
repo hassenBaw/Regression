@@ -1,0 +1,24 @@
+# Developed by Dr.BABAOUSMAIL 
+import numpy as np
+
+data=np.genfromtxt('D:/inputcg.csv',delimiter=",")
+line=np.zeros((2,48))
+for i in range(48):
+    corr=max(data[:,i])
+    line[0][i]=i+1
+    line[1][i]=corr
+max_list= line[1][:]
+sort_list= np.sort(max_list)
+list_1=np.reshape(sort_list,(6,8))
+#print(list_1)
+list_2=list_1
+for i in range(6):
+    for j in range(8):
+        var=list_2[i][j]
+        for t in range(48):
+            if line[1][t]==var:
+                list_2[i][j]=line[0][t]             
+
+list_2= np.sort(list_2)
+name='D:/results_classes.csv'  
+np.savetxt(name, list_2 ,fmt='%10.5f', delimiter=",")   
